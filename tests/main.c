@@ -1,5 +1,6 @@
 
 #include "../src/todo.h"
+#include <assert.h>
 
 int
 main (int argc, char *argv[]) {
@@ -9,8 +10,8 @@ main (int argc, char *argv[]) {
     todo_error("Failed to open database");
   }
 
-  todo_db_set(db, "foo", "bar");
-  printf("value: %s\n", todo_db_get(db, "foo"));
+  assert(0 == todo_db_set(db, "foo", "bar"));
+  assert(0 == strcmp("bar", todo_db_get(db, "foo")));
 
   return 0;
 }
