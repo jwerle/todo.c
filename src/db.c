@@ -54,7 +54,7 @@ todo_db_set (todo_db_t *db, char *key, char *value) {
     return -1;
   }
 
-  int rc = sp_set(db->dbh, &key, sizeof(key), value, sizeof(value));
+  int rc = sp_set(db->dbh, key, sizeof(key), value, sizeof(value));
 
   if (-1 == rc) {
     todo_ferror("Error setting '%s'. sophia: '%s'\n", key, sp_error(db->dbh));
@@ -71,7 +71,9 @@ todo_db_get (todo_db_t *db, char *key) {
   size_t size;
   int rc;
 
-  rc = sp_get(db->dbh, &key, sizeof(key), &value, &size);
+  rc = sp_get(db->dbh, key, sizeof(key), &value, &size);
+
+  printf("%d\n", rc);
 
   if (-1 == rc) {
     todo_ferror("Error getting '%s'. sophia: '%s'\n", key, sp_error(db->dbh));

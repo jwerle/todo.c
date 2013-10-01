@@ -10,16 +10,17 @@ PREFIX = /usr/local
 
 all: clean test build
 
-test: sophia
+test:
 	$(CC) $(SRC) tests/main.c $(CFLAGS) -o todo-test
 	./todo-test
 
-build: sophia
+build:
 	$(CC) $(SRC) src/main.c $(CFLAGS) -o todo
 
 clean:
 	rm -f $(TEST_BIN)
 	rm -f $(BIN)
+	rm -rf test-db
 
 install:
 	install $(BIN) $(PREFIX)/bin
@@ -28,7 +29,4 @@ uninstall:
 	rm -f $(PREFIX)/bin/($BIN)
 
 
-sophia:
-	$(cd sophia && $(MAKE))
-
-.PHONY: all test build clean sophia
+.PHONY: all test build clean
