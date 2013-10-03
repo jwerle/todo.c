@@ -17,5 +17,5 @@
 *.app
 
 todo
-todo-test
-test-db
+todo-*
+test-*

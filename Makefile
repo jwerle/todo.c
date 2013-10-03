@@ -1,9 +1,9 @@
 
 
 SOPHIA_SRC = $(wildcard sophia/db/*.c)
-SRC = $(SOPHIA_SRC) $(filter-out src/main.c, $(wildcard src/*.c))
+SRC = $(SOPHIA_SRC) $(wildcard src/*.c)
+EXEC = todo todo-new todo-ls todo-completion
 CFLAGS = -std=c99 -Wall -Isophia/db
-BIN = todo
 TEST_BIN = todo-test
 PREFIX = /usr/local
 
@@ -15,18 +15,26 @@ test:
 	./todo-test
 
 build:
-	$(CC) $(SRC) src/main.c $(CFLAGS) -o todo
+	@for bin in $(EXEC); do\
+		$(CC) $(SRC) $$bin.c $(CFLAGS) -o $$bin;\
+	done;
 
 clean:
 	rm -f $(TEST_BIN)
-	rm -f $(BIN)
+	rm -f $(EXEC)
 	rm -rf test-db
 
 install:
-	install $(BIN) $(PREFIX)/bin
+	@for bin in $(EXEC); do\
+		install $$bin $(PREFIX)/bin \\n;\
+	done;
+	cp todo-completions.sh /etc/todo-completions
 
 uninstall:
-	rm -f $(PREFIX)/bin/($BIN)
+	for bin in $(EXEC); do\
+		rm -f $(PREFIX)/bin/$$bin;\
+	done;
+	rm -f /etc/todo-completions
 
 
-.PHONY: all test build clean
+.PHONY: all test build clean $(EXEC)

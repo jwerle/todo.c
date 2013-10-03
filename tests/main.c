@@ -12,7 +12,7 @@ main (int argc, char *argv[]) {
     todo_error("Failed to open database");
   }
 
-  //assert(0 == todo_db_set(db, "foo", "bar"));
+  assert(0 == todo_db_set(db, "foo", "bar"));
   printf("%s\n", todo_db_get(db, "foo"));
   char *foo = todo_db_get(db, "foo");
   assert(foo);
