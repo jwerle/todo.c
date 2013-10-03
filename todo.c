@@ -38,7 +38,14 @@ main (int argc, char *argv[]) {
     return 0;
 
   } else {
+    if (0 == strncmp("-", argv[1], 1)) {
+      fprintf(stderr, "error: Unknown option '%s'\n", argv[1]);
+    } else {
+      fprintf(stderr, "error: Unknown command '%s'\n", argv[1]);
+    }
 
+    usage();
+    return 1;
   }
 
   return 0;
