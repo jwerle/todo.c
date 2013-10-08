@@ -4,10 +4,10 @@
 
 
 /**
- * todo
+ * todo - "core.h"
  *
  * copyright (c) joseph werle
- * BSD license
+ * MIT license
  */
 
 
@@ -15,7 +15,8 @@
 #define TODO_MINOR_VERSION 0
 #define TODO_PATCH_VERSION 1
 
-#include <unistd.h> // getlogin(), getcwd(), getuid()
+
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -36,12 +37,12 @@
 
 #define todo_ferror(fmt, ...)                                   \
   char t[256];                                                  \
-  sprintf(t, "todo: error: %s\n", fmt);                         \
+  sprintf(t, "error: %s\n", fmt);                         \
   fprintf(stderr, t, ##__VA_ARGS__);
 
 
 
-#define repo_printf(fmt, ...)                                   \
+#define todo_printf(fmt, ...)                                   \
   char t[256];                                                  \
   sprintf(t, "todo: %s", fmt);                                  \
   printf(t, ##__VA_ARGS__);

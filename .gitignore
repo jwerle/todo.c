@@ -18,4 +18,6 @@
 
 todo
 todo-*
+!todo-*.c
 test-*
+.todo
