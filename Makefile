@@ -1,9 +1,8 @@
 
-
 SOPHIA_SRC = $(wildcard sophia/db/*.c)
-SRC = $(SOPHIA_SRC) $(wildcard src/*.c)
-EXEC = todo todo-new todo-ls todo-completion
-CFLAGS = -std=c99 -Wall -Isophia/db
+SRC = $(SOPHIA_SRC) $(wildcard deps/*.c) $(wildcard src/*.c)
+EXEC = todo todo-new todo-ls todo-completion todo-init
+CFLAGS = -std=c99 -Wall -Isophia/db -Ideps
 TEST_BIN = todo-test
 PREFIX = /usr/local
 
