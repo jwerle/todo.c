@@ -58,6 +58,13 @@ main (int argc, char *argv[]) {
   int pathc = path_split(pathv, paths, ":");
   int i = 0, rc;
 
+  // check if we can make calls
+  // to the command processor
+  if (0 == system(NULL)) {
+    todo_error("systems command processor is not available.");
+    exit(1);
+  }
+
   if (NULL == cmd) {
     cmd = "help";
   }
