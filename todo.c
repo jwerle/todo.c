@@ -28,7 +28,8 @@ verbose_opt (command_t *self);
 char *
 man_exec () {
   char **paths = calloc(1, sizeof(char));
-  int pathc = path_split(getenv("PATH"), paths, ":");
+  char *pathv = strdup(getenv("PATH"));
+  int pathc = path_split(pathv, paths, ":");
   int i = 0, rc;
 
   for (; i < pathc; ++i) {
@@ -36,12 +37,14 @@ man_exec () {
     sprintf(cmd, "%s/man", paths[i]);
     rc = access(cmd, X_OK);
     if (0 == rc) {
+      free(pathv);
       return cmd;
     } else {
       free(cmd);
     }
   }
 
+  free(pathv);
   return NULL;
 }
 
@@ -51,14 +54,15 @@ main (int argc, char *argv[]) {
   char *cmd = argv[1];
   char **paths = calloc(1, sizeof(char));
   char *mancmd = man_exec();
-  int pathc = path_split(getenv("PATH"), paths, ":");
+  char *pathv = strdup(getenv("PATH"));
+  int pathc = path_split(pathv, paths, ":");
   int i = 0, rc;
 
   if (NULL == cmd) {
     cmd = "help";
   }
 
-  if (argc > 1 && 0 != strcmp(cmd, "help")) {
+  if (argc > 1 && 0 != strcmp(cmd, "help") && 0 != strncmp(cmd, "-", 1)) {
     for (; i < pathc; ++i) {
       char *tpath = malloc(sizeof(char) * 256);
       char tcmd[4096];
