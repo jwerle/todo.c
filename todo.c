@@ -25,11 +25,32 @@ static void
 verbose_opt (command_t *self);
 
 
+char *
+man_exec () {
+  char **paths = calloc(1, sizeof(char));
+  int pathc = path_split(getenv("PATH"), paths, ":");
+  int i = 0, rc;
+
+  for (; i < pathc; ++i) {
+    char *cmd = malloc(sizeof(char) * 256);
+    sprintf(cmd, "%s/man", paths[i]);
+    rc = access(cmd, X_OK);
+    if (0 == rc) {
+      return cmd;
+    } else {
+      free(cmd);
+    }
+  }
+
+  return NULL;
+}
+
 int
 main (int argc, char *argv[]) {
   char tmp[256];
   char *cmd = argv[1];
   char **paths = calloc(1, sizeof(char));
+  char *mancmd = man_exec();
   int pathc = path_split(getenv("PATH"), paths, ":");
   int i = 0, rc;
 
@@ -50,11 +71,13 @@ main (int argc, char *argv[]) {
         sprintf(tcmd, "%s %s", tpath, args);
         rc = system(tcmd);
         free(tpath);
-        return rc;
+        exit(rc);
       }
 
       free(tpath);
     }
+
+   todo_ferror("'todo %s' is not a todo command found in your path.", cmd);
   }
 
   command_t program;
@@ -79,7 +102,19 @@ main (int argc, char *argv[]) {
   }
 
   if (0 == strcmp("help", cmd)) {
-    help(&program);
+    if (argc > 2) {
+      if (NULL == mancmd) {
+        todo_error("The program 'man' was not found in your path");
+        exit(1);
+      }
+
+      char helpcmd[256];
+      sprintf(helpcmd, "%s todo-%s", mancmd, argv[2]);
+      rc = system(helpcmd);
+      exit(rc);
+    } else {
+      help(&program);
+    }
   } else {
     help(&program);
   }
@@ -101,6 +136,6 @@ verbose_opt (command_t *self) {
 static void
 help (command_t *program) {
   command_help(program);
-  printf("\nSee 'todo help <command>' for more help on a certain command.\n");
+  printf("See 'todo help <command>' for more help on a certain command.\n");
   exit(1);
 }
