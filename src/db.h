@@ -1,6 +1,6 @@
 
-#ifndef __TODO_H__
-#define __TODO_H__ 1
+#ifndef __TODO_DB_H__
+#define __TODO_DB_H__ 1
 
 #include "core.h"
 #include <sophia.h>

@@ -41,13 +41,12 @@ command_help(command_t *self) {
   printf("\n");
   for (int i = 0; i < self->option_count; ++i) {
     command_option_t *option = &self->options[i];
-    printf("    %s, %-25s %s\n"
+    printf("  %s, %-25s %s\n"
       , option->small
       , option->large_with_arg
       , option->description);
   }
   printf("\n");
-  exit(0);
 }
 
 /*
@@ -93,12 +92,12 @@ command_free(command_t *self) {
 
 static void
 parse_argname(const char *str, char *flag, char *arg) {
-  int buffer = 0;
+  int buffer = 0, i = 0;
   size_t flagpos = 0;
   size_t argpos = 0;
-  size_t len = strlen(str);
+  int len = (int) strlen(str);
 
-  for (int i = 0; i < len; ++i) {
+  for (; i < len; ++i) {
     if (buffer || '[' == str[i] || '<' == str[i]) {
       buffer = 1;
       arg[argpos++] = str[i];

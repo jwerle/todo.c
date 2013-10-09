@@ -44,7 +44,7 @@ todo_init (char *path) {
   }
 
   todo->config_path = config_path;
-  todo->path = path;
+  todo->path = strdup(path);
   todo->db = todo_db_new(db_path);
   todo->config_path = config_path;
 

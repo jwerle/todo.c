@@ -62,7 +62,7 @@ output (char *file) {
 
   // if result size is not equal to told size
   // then exit with error
-  if (size != result_size) {
+  if (size != (int) result_size) {
     fprintf(stderr, "error: Error reading file '%s'\n", file);
     exit(3);
   }

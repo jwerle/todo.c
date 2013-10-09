@@ -28,11 +28,11 @@ main (int argc, char *argv[]) {
     cmd = "";
   }
 
-  program.usage = "[--version|-V] [-v|--verbose] [-p|--path [path]] <command> <args>";
+  program.usage = "[--version] [--verbose] [--path <path>]";
 
   // opts
   command_option(&program, "-v", "--verbose", "enable verbose output", verbose_opt);
-  command_option(&program, "-p", "--path [path]", "set the path to initialize", path_opt);
+  command_option(&program, "-p", "--path <path>", "set the path to initialize", path_opt);
 
   // parse
   command_parse(&program, argc, argv);
