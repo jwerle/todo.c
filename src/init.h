@@ -24,7 +24,7 @@ typedef struct todo {
 
 
 todo_t *
-todo_init (char *path);
+todo_init (char *path, int warn);
 
 
 #endif

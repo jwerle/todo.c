@@ -28,11 +28,11 @@ main (int argc, char *argv[]) {
     cmd = "";
   }
 
-  program.usage = "[--version|-V] [-v|--verbose] [-p|--path [path]] <command> <args>";
+  program.usage = "[--version] [--verbose] [--path <path>]";
 
   // opts
   command_option(&program, "-v", "--verbose", "enable verbose output", verbose_opt);
-  command_option(&program, "-p", "--path [path]", "set the path to initialize", path_opt);
+  command_option(&program, "-p", "--path <path>", "set the path to initialize", path_opt);
 
   // parse
   command_parse(&program, argc, argv);
@@ -49,7 +49,7 @@ main (int argc, char *argv[]) {
     command_help(&program);
     exit(1);
   } else {
-    todo_t *todo = todo_init(opts.path);
+    todo_t *todo = todo_init(opts.path, 1);
     if (1 == todo->is_fresh) {
       todo_printf("Initialized a new todo project at %s\n", todo->path);
     }
