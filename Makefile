@@ -1,7 +1,7 @@
 
 SOPHIA_SRC = $(wildcard sophia/db/*.c)
 SRC = $(SOPHIA_SRC) $(wildcard deps/*.c) $(wildcard src/*.c)
-EXEC = todo todo-new todo-ls todo-completion todo-init
+EXEC = todo todo-new todo-ls todo-completion todo-init todo-config
 CFLAGS = -Isophia/db -Ideps -pthread -std=c99 -Wall -march=native -fPIC -fvisibility=hidden -O2
 TEST_BIN = todo-test
 PREFIX = /usr/local
@@ -35,5 +35,7 @@ uninstall:
 	done;
 	rm -f /etc/todo-completions
 
+%.c: %
+	$(CC) $(SRC) $^.c $(CFLAGS) -o $^
 
 .PHONY: all test build clean $(EXEC)

@@ -5,6 +5,7 @@
 
 #include "db.h"
 #include "init.h"
+#include "config.h"
 
 
 #endif
