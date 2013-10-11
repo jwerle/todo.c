@@ -11,8 +11,11 @@ todo_init (char *path) {
   todo_t *todo = malloc(sizeof(todo_t));
   strcat(path, "/.todo");
 
+  todo->is_fresh = 1;
+
   // fatal
   if (fs_stat(path)) {
+    todo->is_fresh = 0;
     todo_ferror("todo is already initialized in '%s'", path);
     exit(1);
   }

@@ -50,7 +50,9 @@ main (int argc, char *argv[]) {
     exit(1);
   } else {
     todo_t *todo = todo_init(opts.path);
-    todo_printf("Initialized a new todo project at %s\n", todo->path);
+    if (1 == todo->is_fresh) {
+      todo_printf("Initialized a new todo project at %s\n", todo->path);
+    }
   }
 
   command_free(&program);

@@ -19,6 +19,7 @@ typedef struct todo {
   todo_db_t *db;
   char *path;
   char *config_path;
+  int is_fresh;
 } todo_t;
 
 
