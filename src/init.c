@@ -17,7 +17,7 @@ todo_init (char *path, int warn) {
   strcat(path, "/.todo");
 
   if ((stats = fs_stat(path)) && 1 == warn) {
-    todo_printf("todo is already initialized in '%s'", path);
+    todo_printf("todo is already initialized in '%s'\n", path);
   }
 
   char *db_path = strdup(path);

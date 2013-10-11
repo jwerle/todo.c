@@ -37,7 +37,6 @@ man_exec () {
     sprintf(cmd, "%s/man", paths[i]);
     rc = access(cmd, X_OK);
     if (0 == rc) {
-      free(pathv);
       return cmd;
     } else {
       free(cmd);
