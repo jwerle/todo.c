@@ -151,6 +151,9 @@ verbose_opt (command_t *self) {
 static void
 help (command_t *program) {
   command_help(program);
-  printf("  get <name>                   get value\n");
-  printf("  set <name> <value>           set value\n");
+  printf("  Commands: \n\n");
+  printf("  get --key <name>                   get value\n");
+  printf("  set --key <name> --value <value>   set value\n");
+  printf("  rm --key <name>                    removes a value\n");
+  printf("  ls|list                            lists all values\n");
 }

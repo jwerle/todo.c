@@ -2,7 +2,6 @@
 #ifndef __TODO_CONFIG_H__
 #define __TODO_CONFIG_H__ 1
 
-#include <ini.h>
 #include "todo.h"
 
 
