@@ -49,7 +49,7 @@ main (int argc, char *argv[]) {
     command_help(&program);
     exit(1);
   } else {
-    todo_t *todo = todo_init(opts.path);
+    todo_t *todo = todo_init(opts.path, 1);
     todo_printf("Initialized a new todo project at %s\n", todo->path);
   }
 

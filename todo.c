@@ -94,7 +94,7 @@ main (int argc, char *argv[]) {
   command_t program;
   command_init(&program, "todo", TODO_VERSION_STR);
 
-  program.usage = "[--version] [--path <path>] [--verbose]\n            <command> [<args>]";
+  program.usage = "<command> [<args>] [--version] [--path <path>] [--verbose]";
 
   // opts
   command_option(&program, "-p", "--path <path>", "set the scope path", path_opt);

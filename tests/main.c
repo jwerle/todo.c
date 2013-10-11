@@ -1,6 +1,8 @@
 
-#include "../src/todo.h"
+#include <stdio.h>
 #include <assert.h>
+#include "../src/todo.h"
+
 
 int
 main (int argc, char *argv[]) {
@@ -17,6 +19,8 @@ main (int argc, char *argv[]) {
   char *foo = todo_db_get(db, "foo");
   assert(foo);
   assert(0 == strcmp("bar", foo));
+
+
 
   return 0;
 }

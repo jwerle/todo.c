@@ -46,4 +46,32 @@ char *
 todo_db_get (todo_db_t *db, char *key);
 
 
+/**
+ * Iterates over each key in database
+ */
+
+
+int
+todo_db_foreach (todo_db_t *db, void (*fn)(char *key, char *value, todo_db_t *db));
+
+
+/**
+ * Iterates and returns a reduced value
+ */
+
+char *
+todo_db_reduce (todo_db_t *db, char *(*fn)(char *curkey, char *curvalue,
+                                           char *nextkey, char *nextvalue, todo_db_t *db));
+
+
+/**
+ * Iterates over each key in database
+ * and removes the key if a 0 is returned by the
+ * callback
+ */
+
+int
+todo_db_rm_each (todo_db_t *db, int (*fn)(char *key, char *value, todo_db_t *db));
+
+
 #endif
